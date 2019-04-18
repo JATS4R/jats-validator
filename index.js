@@ -1,0 +1,58 @@
+const cors = require('cors')
+const express = require('express')
+const multer = require('multer')
+const validator = require('schematron-runner')
+const libxml = require('libxmljs')
+
+process.env.XML_CATALOG_FILES = require.resolve('@jats4r/dtds/catalog.xml')
+
+const schematron = require.resolve('@jats4r/schematrons/schematrons/1.0/jats4r.sch')
+
+const app = express()
+app.use(cors())
+
+const upload = multer()
+
+app.get('*', (req, res) => {
+  res.send(`<!doctype html>
+<meta charset="utf-8">
+<title>JATS4R Validator</title>
+
+<form method="post" enctype="multipart/form-data">
+  <label>XML: <input type="file" name="xml" accept="application/xml"></label>
+  <button type="submit">Validate</button>
+</form>`)
+})
+
+app.post('*', upload.single('xml'), (req, res, next) => {
+  const data = req.body.xml || req.file.buffer.toString()
+
+  // https://github.com/libxmljs/libxmljs/wiki/Document
+
+  const { errors } = libxml.parseXmlString(data, {
+    dtdload: true,
+    dtdvalid: true,
+    loaddtd: true,
+    noblanks: true,
+    noent: true,
+    nonet: true,
+    // dtdattr: true,
+    // nsclean: true,
+  })
+
+  // TODO: return formatted XML via XMLLINT_INDENT?
+
+  if (errors.length) {
+    res.json({
+      errors: errors.map(({ line, column, message }) => ({ line, column, message }))
+    })
+  } else {
+    validator.validate(data, schematron).then(results => {
+      res.json({ results })
+    }).catch(error => {
+      next(error)
+    })
+  }
+})
+
+module.exports = app

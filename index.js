@@ -3,10 +3,15 @@ const express = require('express')
 const multer = require('multer')
 const validator = require('schematron-runner')
 const libxml = require('libxmljs')
+const path = require('path')
 
-process.env.XML_CATALOG_FILES = require.resolve('@jats4r/dtds/catalog.xml')
+if (!process.env.XML_CATALOG_FILES) {
+  process.env.XML_CATALOG_FILES = require.resolve('@jats4r/dtds/catalog.xml')
+}
 
-const schematron = require.resolve('@jats4r/schematrons/schematrons/1.0/jats4r.sch')
+const schematron = process.env.SCHEMATRON
+  ? path.resolve(process.env.SCHEMATRON)
+  : require.resolve('@jats4r/schematrons/schematrons/1.0/jats4r.sch')
 
 const app = express()
 app.use(cors())

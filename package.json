@@ -14,7 +14,7 @@
     "schematron-runner": "^1.0.0"
   },
   "scripts": {
-    "dev": "XML_CATALOG_FILES=../jats-dtds/catalog.xml SCHEMATRON=../jats-schematrons/schematrons/1.0/jats4r.sch NODE_ENV=development node $NODE_DEBUG_OPTION server.js",
+    "dev": "NODE_ENV=development node $NODE_DEBUG_OPTION server.js",
     "start": "node server.js"
   }
 }

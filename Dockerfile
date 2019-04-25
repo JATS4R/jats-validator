@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY package.json package-lock.json /app/
 
-RUN npm ci
+RUN npm ci --only=production
 
 COPY index.js server.js /app/
 
-ENTRYPOINT ['node', 'server.js']
+CMD ["npm", "start"]

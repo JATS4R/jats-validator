@@ -6,6 +6,6 @@ COPY package.json package-lock.json /app/
 
 RUN npm ci --only=production
 
-COPY index.js server.js healthcheck.js /app/
+COPY index.js server.js /app/
 
 CMD ["npm", "start"]

@@ -3,7 +3,6 @@ const express = require('express')
 const multer = require('multer')
 const validator = require('schematron-runner')
 const libxml = require('libxmljs')
-const path = require('path')
 
 const app = express()
 app.use(cors())

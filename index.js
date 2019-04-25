@@ -2,8 +2,7 @@ const cors = require('cors')
 const express = require('express')
 const multer = require('multer')
 const validator = require('schematron-runner')
-const libxml = require('libxmljs')
-const path = require('path')
+const libxml = require('libxmljs2')
 
 const app = express()
 app.use(cors())
@@ -17,7 +16,8 @@ app.get('*', (req, res) => {
 
 <form method="post" enctype="multipart/form-data">
   <label>XML: <input type="file" name="xml" accept="application/xml"></label>
-  <button type="submit">Validate</button>
+  <button type="submit" formaction="/dtd">Validate with DTD</button>
+  <button type="submit" formaction="/schematron">Validate with Schematron</button>
 </form>`)
 })
 
@@ -25,10 +25,7 @@ app.post('/dtd', upload.single('xml'), (req, res, next) => {
   const data = req.body.xml || req.file.buffer.toString()
 
   process.env.XML_DEBUG_CATALOG = process.env.NODE_ENV === 'development'
-
-  if (!process.env.XML_CATALOG_FILES) {
-    process.env.XML_CATALOG_FILES = require.resolve('@jats4r/dtds/catalog.xml')
-  }
+  process.env.XML_CATALOG_FILES = require.resolve('@jats4r/dtds/catalog.xml')
 
   // https://github.com/libxmljs/libxmljs/wiki/Document
 
@@ -57,10 +54,9 @@ app.post('/dtd', upload.single('xml'), (req, res, next) => {
 app.post('/schematron', upload.single('xml'), (req, res, next) => {
   const data = req.body.xml || req.file.buffer.toString()
 
-  const schematron = process.env.SCHEMATRON
-    ? path.resolve(process.env.SCHEMATRON)
-    : // : require.resolve('@jats4r/schematrons/schematrons/1.0/jats4r.sch')
-      'https://jats-schematrons.now.sh/schematrons/1.0/jats4r.sch'
+  const schematron = require.resolve(
+    '@jats4r/schematrons/schematrons/1.0/jats4r.sch'
+  )
 
   validator
     .validate(data, schematron)

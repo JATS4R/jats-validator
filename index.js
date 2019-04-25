@@ -17,7 +17,8 @@ app.get('*', (req, res) => {
 
 <form method="post" enctype="multipart/form-data">
   <label>XML: <input type="file" name="xml" accept="application/xml"></label>
-  <button type="submit">Validate</button>
+  <button type="submit" formaction="/dtd">Validate with DTD</button>
+  <button type="submit" formaction="/schematron">Validate with Schematron</button>
 </form>`)
 })
 

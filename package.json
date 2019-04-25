@@ -9,7 +9,7 @@
     "@jats4r/schematrons": "^0.0.1",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "libxmljs": "^0.19.5",
+    "libxmljs2": "^0.20.1",
     "multer": "^1.4.1",
     "schematron-runner": "^1.0.0"
   },

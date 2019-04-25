@@ -2,7 +2,7 @@ const cors = require('cors')
 const express = require('express')
 const multer = require('multer')
 const validator = require('schematron-runner')
-const libxml = require('libxmljs')
+const libxml = require('libxmljs2')
 
 const app = express()
 app.use(cors())

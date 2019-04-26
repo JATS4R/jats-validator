@@ -5,8 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@jats4r/dtds": "^0.0.2",
-    "@jats4r/schematrons": "^0.0.1",
+    "@jats4r/dtds": "0.0.3",
+    "@jats4r/schematrons": "0.0.2",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "libxmljs2": "^0.20.1",
@@ -17,7 +17,7 @@
     "dev": "NODE_ENV=development node $NODE_DEBUG_OPTION server.js",
     "start": "node server.js",
     "docker:build": "docker build -t jats-validator .",
-    "docker:run": "docker run --rm -p 8081:8081 -e PORT=8081 jats-validator"
+    "docker:run": "docker run --rm -p 8080:8080 -e PORT=8080 jats-validator"
   },
   "prettier": {
     "semi": false,

@@ -25,7 +25,9 @@ app.post('/dtd', upload.single('xml'), (req, res, next) => {
   const data = req.body.xml || req.file.buffer.toString()
 
   process.env.XML_DEBUG_CATALOG = process.env.NODE_ENV === 'development'
-  process.env.XML_CATALOG_FILES = require.resolve('@jats4r/dtds/catalog.xml')
+  process.env.XML_CATALOG_FILES = require.resolve(
+    '@jats4r/dtds/schema/catalog.xml'
+  )
 
   // https://github.com/libxmljs/libxmljs/wiki/Document
 

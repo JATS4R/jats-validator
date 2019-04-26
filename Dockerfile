@@ -1,11 +1,18 @@
-FROM node:10-alpine
+FROM hubdock/php7-apache-saxonhe AS builder
 
-WORKDIR /app
+WORKDIR /build
+COPY build ./
+ARG SCHEMATRONS_VERSION=0.0.2
+RUN curl -L https://github.com/JATS4R/jats-schematrons/archive/v${SCHEMATRONS_VERSION}.tar.gz | tar xvz
+RUN php generate-xsl.php jats-schematrons-${SCHEMATRONS_VERSION}/schematrons/1.0/jats4r.sch jats4r.xsl
 
-COPY package.json package-lock.json /app/
+FROM hubdock/php7-apache-saxonhe
 
-RUN npm ci --only=production
+WORKDIR /dtds
+ARG DTDS_VERSION=0.0.3
+RUN curl -L https://github.com/JATS4R/jats-dtds/archive/v${DTDS_VERSION}.tar.gz | tar xvz
+ENV XML_CATALOG_FILES=/dtds/jats-dtds-${DTDS_VERSION}/schema/catalog.xml
 
-COPY index.js server.js /app/
+COPY web/ /var/www/html/
+COPY --from=builder /build/jats4r.xsl /var/www/html/
 
-CMD ["npm", "start"]

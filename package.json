@@ -18,5 +18,10 @@
     "start": "node server.js",
     "docker:build": "docker build -t jats-validator .",
     "docker:run": "docker run --rm -p 8081:8081 -e PORT=8081 jats-validator"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
   }
 }

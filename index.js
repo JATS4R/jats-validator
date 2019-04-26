@@ -16,12 +16,39 @@ app.get('*', (req, res) => {
 
 <form method="post" enctype="multipart/form-data">
   <label>XML: <input type="file" name="xml" accept="application/xml"></label>
+  <button type="submit" formaction="/format">Format</button>
   <button type="submit" formaction="/dtd">Validate with DTD</button>
   <button type="submit" formaction="/schematron">Validate with Schematron</button>
 </form>`)
 })
 
-app.post('/dtd', upload.single('xml'), (req, res, next) => {
+app.post('/format', upload.single('xml'), (req, res) => {
+  const data = req.body.xml || req.file.buffer.toString()
+
+  process.env.XML_DEBUG_CATALOG = process.env.NODE_ENV === 'development'
+  process.env.XML_CATALOG_FILES = require.resolve(
+    '@jats4r/dtds/schema/catalog.xml'
+  )
+  process.env.XMLLINT_INDENT = 2
+
+  // https://github.com/libxmljs/libxmljs/wiki/Document
+
+  const doc = libxml.parseXmlString(data, {
+    // dtdattr: true,
+    dtdload: true,
+    dtdvalid: true,
+    loaddtd: true,
+    noblanks: true,
+    nocdata: true,
+    noent: true,
+    nonet: true,
+    nsclean: true,
+  })
+
+  res.set('Content-Type', 'application/xml').send(doc.toString())
+})
+
+app.post('/dtd', upload.single('xml'), (req, res) => {
   const data = req.body.xml || req.file.buffer.toString()
 
   process.env.XML_DEBUG_CATALOG = process.env.NODE_ENV === 'development'
@@ -42,14 +69,14 @@ app.post('/dtd', upload.single('xml'), (req, res, next) => {
     // nsclean: true,
   })
 
-  // TODO: return formatted XML via XMLLINT_INDENT?
+  const selectOutput = ({ line, column, message }) => ({
+    line,
+    column,
+    message,
+  })
 
   res.json({
-    errors: errors.map(({ line, column, message }) => ({
-      line,
-      column,
-      message,
-    })),
+    errors: errors.map(selectOutput),
   })
 })
 

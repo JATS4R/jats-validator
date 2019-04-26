@@ -6,7 +6,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/jats-validator']
     # Deploy container image to Cloud Run
-#  - name: 'gcr.io/cloud-builders/gcloud'
-#    args: ['beta', 'run', 'deploy', 'jats-validator', '--image', 'gcr.io/$PROJECT_ID/jats-validator', '--region', 'us-central1']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['beta', 'run', 'deploy', 'jats-validator', '--image', 'gcr.io/$PROJECT_ID/jats-validator', '--region', 'us-central1']
 images:
   - gcr.io/$PROJECT_ID/jats-validator

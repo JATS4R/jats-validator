@@ -5,6 +5,7 @@ const validator = require('schematron-runner')
 const libxml = require('libxmljs2')
 
 const app = express()
+app.set('json spaces', 2)
 app.use(cors())
 
 const upload = multer()

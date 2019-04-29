@@ -62,12 +62,8 @@ app.post('/dtd', upload.single('xml'), (req, res) => {
   const { errors } = libxml.parseXmlString(data, {
     dtdload: true,
     dtdvalid: true,
-    loaddtd: true,
-    noblanks: true,
-    noent: true,
     nonet: true,
-    // dtdattr: true,
-    // nsclean: true,
+    recover: true,
   })
 
   const selectOutput = ({ line, column, message }) => ({

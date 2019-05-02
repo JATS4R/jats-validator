@@ -1,11 +1,11 @@
 FROM node:10-alpine
 
-WORKDIR /app
+WORKDIR /opt
 
-COPY package.json package-lock.json /app/
+COPY package.json package-lock.json ./
 
 RUN npm ci --only=production
 
-COPY index.js server.js /app/
+COPY app ./app/
 
 CMD ["npm", "start"]

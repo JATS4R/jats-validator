@@ -2,7 +2,7 @@
   "name": "@jats4r/validator",
   "version": "0.0.2",
   "private": true,
-  "main": "index.js",
+  "main": "app",
   "license": "MIT",
   "dependencies": {
     "@jats4r/dtds": "0.0.3",
@@ -14,8 +14,8 @@
     "schematron-runner": "^1.0.0"
   },
   "scripts": {
-    "dev": "NODE_ENV=development node $NODE_DEBUG_OPTION server.js",
-    "start": "node server.js",
+    "dev": "NODE_ENV=development node $NODE_DEBUG_OPTION app/server.js",
+    "start": "node app/server.js",
     "docker:build": "docker build -t jats-validator .",
     "docker:run": "docker run --rm -p 8080:8080 -e PORT=8080 jats-validator"
   },

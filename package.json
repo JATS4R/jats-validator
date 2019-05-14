@@ -23,5 +23,10 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "es5"
+  },
+  "renovate": {
+    "extends": [
+      "config:base"
+    ]
   }
 }

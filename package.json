@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "@jats4r/dtds": "0.0.3",
-    "@jats4r/schematrons": "0.0.3",
+    "@jats4r/schematrons": "0.0.4",
     "cors": "2.8.5",
     "express": "4.16.4",
     "libxmljs2": "0.20.1",

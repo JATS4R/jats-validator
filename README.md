@@ -4,4 +4,4 @@
 * `/dtd`: a JSON object containing the results of validating the input against the DTD specified in the file's doctype. Network requests are disabled, and the DTD is loaded from the [`@jats4r/dtds`](https://github.com/JATS4R/jats-dtds) module.
 * `/schematron`: a JSON object containing the results of validating the input against the JATS4R Schematron rules. The schematron rules are loaded from the [`@jats4r/schematrons`](https://github.com/JATS4R/jats-schematrons) module.
 
-The server runs in a Docker container when deployed for production, and can be run locally with `npm run dev` for development.
+The server runs as a lambda function when deployed for production, and can be run locally with `now dev` for development.

@@ -1,6 +1,4 @@
-const libxml = require('libxmljs2')
-
-// https://github.com/libxmljs/libxmljs/wiki/Document
+const libxml = require('./libxml')
 
 module.exports = (req, res) => {
   const data = req.body.xml || req.file.buffer.toString()

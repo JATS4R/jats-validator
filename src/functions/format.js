@@ -7,7 +7,6 @@ module.exports = (req, res) => {
     // dtdattr: true,
     dtdload: true,
     dtdvalid: true,
-    loaddtd: true,
     noblanks: true,
     nocdata: true,
     noent: true,

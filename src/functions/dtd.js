@@ -1,6 +1,6 @@
-const libxml = require('libxmljs2')
+const libxml = require('./libxml')
 
-// https://github.com/libxmljs/libxmljs/wiki/Document
+const baseUrl = __dirname + '/../node_modules/@jats4r/dtds/schema/'
 
 const selectOutput = ({ line, column, message }) => ({
   line,
@@ -16,6 +16,7 @@ module.exports = (req, res) => {
     dtdvalid: true,
     nonet: true,
     recover: true,
+    baseUrl,
   })
 
   res.json({

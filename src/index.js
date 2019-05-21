@@ -1,18 +1,10 @@
 const cors = require('cors')
 const express = require('express')
 const upload = require('multer')()
-const dtd = require('./dtd')
-const index = require('./form')
-const format = require('./format')
-const schematron = require('./schematron')
-
-process.env.XML_DEBUG_CATALOG = process.env.NODE_ENV === 'development'
-
-process.env.XML_CATALOG_FILES = require.resolve(
-  '@jats4r/dtds/schema/catalog.xml'
-)
-
-process.env.XMLLINT_INDENT = 2
+const dtd = require('./functions/dtd')
+const index = require('./functions/form')
+const format = require('./functions/format')
+const schematron = require('./functions/schematron')
 
 module.exports = express()
   .use(cors())

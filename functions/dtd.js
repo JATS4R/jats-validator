@@ -1,6 +1,6 @@
 const libxml = require('./libxml')
 
-const baseUrl = __dirname + '/../node_modules/@jats4r/dtds/schema/'
+const baseUrl = __dirname + '/node_modules/@jats4r/dtds/schema/'
 
 const selectOutput = ({ line, column, message }) => ({
   line,

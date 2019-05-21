@@ -2,7 +2,6 @@
   "name": "@jats4r/validator",
   "version": "0.0.2",
   "private": true,
-  "main": "src",
   "license": "MIT",
   "dependencies": {
     "@jats4r/dtds": "0.0.3",

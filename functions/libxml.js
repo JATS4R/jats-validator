@@ -10,8 +10,7 @@ process.env.XML_DEBUG_CATALOG = process.env.NODE_ENV === 'development'
 //   '@jats4r/dtds/schema/catalog.xml'
 // )
 
-process.env.XML_CATALOG_FILES = path.resolve(
-  __dirname + '/../node_modules/@jats4r/dtds/schema/catalog.xml'
-)
+process.env.XML_CATALOG_FILES =
+  __dirname + '/node_modules/@jats4r/dtds/schema/catalog.xml'
 
 process.env.XMLLINT_INDENT = 2

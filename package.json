@@ -13,12 +13,6 @@
     "multer": "1.4.1",
     "schematron-runner": "1.0.0"
   },
-  "scripts": {
-    "dev": "NODE_ENV=development node $NODE_DEBUG_OPTION src/server.js",
-    "start": "node src/server.js",
-    "docker:build": "docker build -t jats-validator .",
-    "docker:run": "docker run --rm -p 8080:8080 -e PORT=8080 jats-validator"
-  },
   "prettier": {
     "semi": false,
     "singleQuote": true,

@@ -1,6 +1,7 @@
-const libxml = require('./libxml')
-
-const baseUrl = __dirname + '/node_modules/@jats4r/dtds/schema/'
+const multer = require('multer')
+const libxml = require('libxmljs')
+const app = require('./app')
+const { baseUrl } = require('./libxml')
 
 const selectOutput = ({ line, column, message }) => ({
   line,
@@ -8,7 +9,7 @@ const selectOutput = ({ line, column, message }) => ({
   message,
 })
 
-module.exports = (req, res) => {
+app.post('*', multer().single('xml'), (req, res) => {
   const data = req.body.xml || req.file.buffer.toString()
 
   const { errors } = libxml.parseXmlString(data, {
@@ -22,4 +23,6 @@ module.exports = (req, res) => {
   res.json({
     errors: errors.map(selectOutput),
   })
-}
+})
+
+module.exports = app

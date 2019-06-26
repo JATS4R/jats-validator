@@ -6,18 +6,35 @@
   "public": true,
   "builds": [
     {
-      "src": "index.js",
+      "src": "src/index.html",
+      "use": "@now/static"
+    },
+    {
+      "src": "src/dtd.js",
       "use": "@now/node",
       "config": {
-        "maxLambdaSize": "10mb",
-        "includeFiles": [
-          "node_modules/@jats4r/dtds/**/*",
-          "node_modules/@jats4r/schematrons/**/*"
-        ]
+        "maxLambdaSize": "10mb"
+      }
+    },
+    {
+      "src": "src/format.js",
+      "use": "@now/node",
+      "config": {
+        "maxLambdaSize": "10mb"
+      }
+    },
+    {
+      "src": "src/schematron.js",
+      "use": "@now/node",
+      "config": {
+        "maxLambdaSize": "10mb"
       }
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/index.js", "methods": ["GET","POST"] }
+    { "src": "/", "dest": "/src/index.html", "methods": ["GET"] },
+    { "src": "/dtd", "dest": "/src/dtd.js", "methods": ["POST"] },
+    { "src": "/format", "dest": "/src/format.js", "methods": ["POST"] },
+    { "src": "/schematron", "dest": "/src/schematron.js", "methods": ["POST"] }
   ]
 }

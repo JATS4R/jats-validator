@@ -1,5 +1,4 @@
 *
-!functions
-!functions/**/*
-!*.js
+!src
+!src/**/*
 !*.json

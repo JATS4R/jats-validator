@@ -1,9 +1,12 @@
+const multer = require('multer')
 const validator = require('schematron-runner')
+const app = require('./app')
 
-const resourceDir =
-  __dirname + '/node_modules/@jats4r/schematrons/schematrons/1.0'
+const baseUrl = __dirname + '/../node_modules/@jats4r/schematrons/schematrons/'
 
-module.exports = (req, res, next) => {
+const resourceDir = baseUrl + '/1.0'
+
+app.post('*', multer().single('xml'), (req, res, next) => {
   const data = req.body.xml || req.file.buffer.toString()
 
   validator
@@ -14,4 +17,6 @@ module.exports = (req, res, next) => {
     .catch(error => {
       next(error)
     })
-}
+})
+
+module.exports = app

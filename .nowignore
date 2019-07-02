@@ -1,4 +1,8 @@
 *
-!src
-!src/**/*
+!functions
+!functions/**/*
+!shared
+!shared/**/*
+!static
+!static/**/*
 !*.json

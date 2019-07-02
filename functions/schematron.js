@@ -1,6 +1,6 @@
 const multer = require('multer')
 const validator = require('schematron-runner')
-const app = require('./app')
+const app = require('../shared/app')
 
 const baseUrl = __dirname + '/../node_modules/@jats4r/schematrons/schematrons/'
 

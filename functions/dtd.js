@@ -1,7 +1,7 @@
 const multer = require('multer')
 const libxml = require('libxmljs')
-const app = require('./app')
-const { baseUrl } = require('./libxml')
+const app = require('../shared/app')
+const { baseUrl } = require('../shared/libxml')
 
 const selectOutput = ({ line, column, message }) => ({
   line,

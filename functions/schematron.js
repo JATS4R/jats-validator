@@ -7,7 +7,7 @@ const baseUrl = __dirname + '/../node_modules/@jats4r/schematrons/schematrons/'
 const resourceDir = baseUrl + '/1.0'
 
 app.post('*', multer().single('xml'), (req, res, next) => {
-  const data = req.body.xml || req.file.buffer.toString()
+  const data = req.file.buffer.toString()
 
   validator
     .validate(data, `${resourceDir}/jats4r.sch`, { resourceDir })

@@ -10,9 +10,9 @@ const selectOutput = ({ line, column, message }) => ({
 })
 
 app.post('*', multer().single('xml'), (req, res) => {
-  const data = req.body.xml || req.file.buffer.toString()
+  const data = req.file.buffer.toString()
 
-  const { errors } = libxml.parseXmlString(data, {
+  const { errors } = libxml.parseXml(data, {
     dtdload: true,
     dtdvalid: true,
     nonet: true,

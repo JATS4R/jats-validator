@@ -5,10 +5,10 @@ const { baseUrl } = require('../shared/libxml')
 const { execSync } = require('child_process')
 
 app.post('*', multer().single('xml'), (req, res) => {
-  const data = req.body.xml || req.file.buffer.toString()
+  const data = req.file.buffer.toString()
 
   try {
-    const doc = libxml.parseXmlString(data, {
+    const doc = libxml.parseXml(data, {
       // dtdattr: true,
       dtdload: true,
       dtdvalid: true,

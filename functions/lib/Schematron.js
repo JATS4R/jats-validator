@@ -23,7 +23,7 @@ class Schematron {
       debug: true,
     }
 
-    const schematronDoc = sync(readFileSync(file, 'utf8'), {})
+    const schematronDoc = sync(readFileSync(file, 'utf8'), { position: true })
 
     this.root = evaluateXPathToFirstNode(
       'sch:schema',
@@ -47,7 +47,9 @@ class Schematron {
         includeNode.getAttribute('href')
       )
 
-      const includeDoc = sync(readFileSync(includeFile, 'utf8'), {})
+      const includeDoc = sync(readFileSync(includeFile, 'utf8'), {
+        position: true,
+      })
 
       const importedNode = schematronDoc.importNode(
         includeDoc.firstElementChild,
@@ -80,7 +82,7 @@ class Schematron {
   }
 
   validate(xml) {
-    const doc = sync(xml, {})
+    const doc = sync(xml, { position: true })
 
     // TODO: patterns and phases?
 
@@ -192,11 +194,14 @@ class Schematron {
           this.options
         )
 
+        const { position } = contextNode
+
         results.push({
           role,
           test,
           result,
           message,
+          position,
         })
       } catch (error) {
         console.error(test)
@@ -233,11 +238,14 @@ class Schematron {
           this.options
         )
 
+        const { position } = contextNode
+
         results.push({
           role,
           test,
           result,
           message,
+          position,
         })
       } catch (error) {
         console.error(test)

@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "jats-validator",
   "alias": "jats-validator.now.sh",
   "scope": "jats4r",
   "public": true,

@@ -1,8 +1,7 @@
 const multer = require('multer')
-const libxml = require('libxmljs')
+const libxml = require('libxmljs2')
 const app = require('../shared/app')
 const { baseUrl } = require('../shared/libxml')
-const { execSync } = require('child_process')
 
 app.post('*', multer().single('xml'), (req, res) => {
   const data = req.file.buffer.toString()

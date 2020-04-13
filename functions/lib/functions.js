@@ -1,5 +1,15 @@
 const { registerCustomXPathFunction } = require('fontoxpath')
 
+const coiTypes = [
+  'coi-statement',
+  'conflict-statement',
+  'conflict-of-interests',
+  'conflict-of-interest',
+  'competing-interests',
+  'competing-interest',
+  'conflict',
+]
+
 registerCustomXPathFunction(
   {
     localName: 'coi-type',
@@ -7,8 +17,27 @@ registerCustomXPathFunction(
   },
   ['xs:string?'],
   'xs:boolean',
-  (domFacade, input) => true // TODO
+  (domFacade, input) =>
+    input
+      ? coiTypes.includes(
+          input
+            .trim()
+            .toLowerCase()
+            .replace(/\W+/g, '-')
+        )
+      : false
 )
+
+const coiTitles = [
+  'CONFLICT OF INTEREST',
+  'CONFLICTS OF INTEREST',
+  'CONFLICT OF INTEREST STATEMENT',
+  'CONFLICT OF INTEREST STATEMENTS',
+  'AUTHOR CONFLICTS',
+  'COMPETING INTEREST',
+  'COMPETING INTERESTS',
+  'CONFLICTS',
+]
 
 registerCustomXPathFunction(
   {
@@ -17,8 +46,15 @@ registerCustomXPathFunction(
   },
   ['xs:string?'],
   'xs:boolean',
-  (domFacade, input) => true // TODO
+  (domFacade, input) =>
+    input ? coiTitles.includes(input.toUpperCase()) : false
 )
+
+const dataAvailabilityTypes = [
+  'data-availability',
+  'data-availability-statement',
+  'data-accessibility',
+]
 
 registerCustomXPathFunction(
   {
@@ -27,7 +63,15 @@ registerCustomXPathFunction(
   },
   ['xs:string?'],
   'xs:boolean',
-  (domFacade, input) => true // TODO
+  (domFacade, input) =>
+    input
+      ? dataAvailabilityTypes.includes(
+          input
+            .trim()
+            .toLowerCase()
+            .replace(/\W+/g, '-')
+        )
+      : false
 )
 
 registerCustomXPathFunction(
@@ -37,7 +81,19 @@ registerCustomXPathFunction(
   },
   ['xs:string?'],
   'xs:boolean',
-  (domFacade, input) => true // TODO
+  (domFacade, input) => {
+    if (!input) {
+      return false
+    }
+
+    const [major, minor] = input.split(/\./, 2)
+
+    if (major !== 1) {
+      return false
+    }
+
+    return minor.match(/^\d+$/) ? Number(minor) >= 1 : minor > '1d2'
+  }
 )
 
 // registerCustomXPathFunction(

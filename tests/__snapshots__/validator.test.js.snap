@@ -50,7 +50,7 @@ Array [
     "message": "
       Conflict of Interest Statements shoud be tagged as <fn fn-type=\\"COI-statement\\" in the <author-notes>.
     ",
-    "result": false,
+    "result": true,
     "role": null,
     "test": "@content-type='COI-statement' or j4r:coi-type(@content-type) or j4r:coi-type(@fn-type)",
   },
@@ -58,7 +58,7 @@ Array [
     "message": "
       Conflict of Interest Statements shoud be tagged as <fn fn-type=\\"COI-statement\\" in the <author-notes>.
     ",
-    "result": false,
+    "result": true,
     "role": null,
     "test": "@content-type='COI-statement' or j4r:coi-type(@content-type) or j4r:coi-title(normalize-space(b[1]))",
   },
@@ -66,7 +66,7 @@ Array [
     "message": "
       Conflict of Interest Statements shoud be tagged as <fn fn-type=\\"COI-statement\\" in the <author-notes>.
     ",
-    "result": false,
+    "result": true,
     "role": null,
     "test": "@sec-type='COI-statement' or j4r:coi-type(@sec-type) or j4r:coi-title(normalize-space(title))",
   },
@@ -74,7 +74,7 @@ Array [
     "message": "
       Data Availability Statements shoud be tagged as <sec sec-type=\\"data-availability\\"> in the <back>.
     ",
-    "result": false,
+    "result": true,
     "role": null,
     "test": "j4r:data-avail-type(@sec-type)",
   },
@@ -82,7 +82,7 @@ Array [
     "message": "
       Data Availability Statements shoud be tagged as <sec sec-type=\\"data-availability\\"> in the <back>.
     ",
-    "result": false,
+    "result": true,
     "role": null,
     "test": "@content-type='data-availability' or @fn-type='data-availability' or j4r:data-avail-type(@content-type) or j4r:data-avail-type(@fn-type)",
   },
@@ -90,7 +90,7 @@ Array [
     "message": "
       Data Availability Statements shoud be tagged as <sec sec-type=\\"data-availability\\"> in the <back>.
     ",
-    "result": false,
+    "result": true,
     "role": null,
     "test": "@content-type='data-availability' or j4r:data-avail-type(@content-type)",
   },
@@ -237,7 +237,7 @@ Array [
       <license> element should have an <ali:license_ref> child, that specifies
       that URI.
     ",
-    "result": false,
+    "result": true,
     "role": null,
     "test": "j4r:jats-version-later-1d2(/article/@dtd-version) and  not(child::node()[local-name()='license_ref'])",
   },
@@ -247,7 +247,7 @@ Array [
       For JATS 1.1d3 and later, if the licence is defined by a canonical URI, then it
       should be specified in the <ali:license_ref> child element.
     ",
-    "result": false,
+    "result": true,
     "role": null,
     "test": "j4r:jats-version-later-1d2(/article/@dtd-version) and        @xlink:href and not(child::node()[local-name()='license_ref'])",
   },

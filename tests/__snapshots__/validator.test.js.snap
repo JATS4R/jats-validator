@@ -1,0 +1,414 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validator validates 1`] = `
+Array [
+  Object {
+    "message": "
+    When there is more than one author and more than one affiliation, there mut be a relationship between them either by position of the <aff> in the <contrib-group> or with <xref ref-type=\\"aff\\"  in the <contrib> pointing to the @id on the <aff>.
+  ",
+    "position": Object {
+      "end": 3735,
+      "start": 3720,
+    },
+    "result": true,
+    "role": null,
+    "test": "parent::article-meta and following-sibling::aff and count(preceding::contrib) > 1 and ((@id and not(idref(@id)) or not(@id)))",
+  },
+  Object {
+    "message": "
+    When there is more than one author and more than one affiliation in a <contrib-group>, there mut be a relationship between them  defined by an <xref ref-type=\\"aff\\" in the <contrib> pointing to the @id on the <aff>.
+  ",
+    "position": Object {
+      "end": 3735,
+      "start": 3720,
+    },
+    "result": false,
+    "role": null,
+    "test": "parent::contrib-group and following-sibling::aff and count(preceding-sibling::contrib) > 1 and ((@id and not(idref(@id)) or not(@id)))",
+  },
+  Object {
+    "message": "
+    Do not put label content in <sup> at the begnning of <aff>. Use  <label> instead.
+  ",
+    "position": Object {
+      "end": 3735,
+      "start": 3720,
+    },
+    "result": true,
+    "role": null,
+    "test": "name(child::node()[1])='sup' and string-length(sup[1])=1",
+  },
+  Object {
+    "message": "<institution-id> must have an @institutiion-id-type.",
+    "position": Object {
+      "end": 11308,
+      "start": 11262,
+    },
+    "result": true,
+    "role": null,
+    "test": "@institution-id-type",
+  },
+  Object {
+    "message": "<country> must have a @country that includes the ISO 3166-1 2-letter country code.",
+    "position": Object {
+      "end": 4041,
+      "start": 4032,
+    },
+    "result": false,
+    "role": null,
+    "test": "@country and string-length(@country)=2",
+  },
+  Object {
+    "message": "
+        Articles should have authors included as <contrib contrib-type=\\"author\\".
+    ",
+    "position": Object {
+      "end": 1040,
+      "start": 1026,
+    },
+    "result": true,
+    "role": null,
+    "test": "not(descendant::contrib[@contrib-type='author'])",
+  },
+  Object {
+    "message": "
+      Conflict of Interest Statements shoud be tagged as <fn fn-type=\\"COI-statement\\" in the <author-notes>.
+    ",
+    "position": Object {
+      "end": 25224,
+      "start": 25220,
+    },
+    "result": true,
+    "role": null,
+    "test": "@content-type='COI-statement' or j4r:coi-type(@content-type) or j4r:coi-type(@fn-type)",
+  },
+  Object {
+    "message": "
+      Conflict of Interest Statements shoud be tagged as <fn fn-type=\\"COI-statement\\" in the <author-notes>.
+    ",
+    "position": Object {
+      "end": 7187,
+      "start": 7184,
+    },
+    "result": true,
+    "role": null,
+    "test": "@content-type='COI-statement' or j4r:coi-type(@content-type) or j4r:coi-title(normalize-space(b[1]))",
+  },
+  Object {
+    "message": "
+      Conflict of Interest Statements shoud be tagged as <fn fn-type=\\"COI-statement\\" in the <author-notes>.
+    ",
+    "position": Object {
+      "end": 13583,
+      "start": 13553,
+    },
+    "result": true,
+    "role": null,
+    "test": "@sec-type='COI-statement' or j4r:coi-type(@sec-type) or j4r:coi-title(normalize-space(title))",
+  },
+  Object {
+    "message": "
+      Data Availability Statements shoud be tagged as <sec sec-type=\\"data-availability\\"> in the <back>.
+    ",
+    "position": Object {
+      "end": 13583,
+      "start": 13553,
+    },
+    "result": true,
+    "role": null,
+    "test": "j4r:data-avail-type(@sec-type)",
+  },
+  Object {
+    "message": "
+      Data Availability Statements shoud be tagged as <sec sec-type=\\"data-availability\\"> in the <back>.
+    ",
+    "position": Object {
+      "end": 25224,
+      "start": 25220,
+    },
+    "result": true,
+    "role": null,
+    "test": "@content-type='data-availability' or @fn-type='data-availability' or j4r:data-avail-type(@content-type) or j4r:data-avail-type(@fn-type)",
+  },
+  Object {
+    "message": "
+      Data Availability Statements shoud be tagged as <sec sec-type=\\"data-availability\\"> in the <back>.
+    ",
+    "position": Object {
+      "end": 7187,
+      "start": 7184,
+    },
+    "result": true,
+    "role": null,
+    "test": "@content-type='data-availability' or j4r:data-avail-type(@content-type)",
+  },
+  Object {
+    "message": "
+      <nlm-citaiton> has been deprecsted. Use <element-citation>.
+    ",
+    "position": Object {
+      "end": 115705,
+      "start": 115690,
+    },
+    "result": true,
+    "role": null,
+    "test": "nlm-citation",
+  },
+  Object {
+    "message": "
+      Use <mixed-citation> rather than <citation>.
+    ",
+    "position": Object {
+      "end": 115705,
+      "start": 115690,
+    },
+    "result": true,
+    "role": null,
+    "test": "citation",
+  },
+  Object {
+    "message": "
+      Each <ref> must have an @id.
+    ",
+    "position": Object {
+      "end": 115705,
+      "start": 115690,
+    },
+    "result": true,
+    "role": null,
+    "test": "not(@id)",
+  },
+  Object {
+    "message": "There should not be two or more <kwd-group>s without a @kwd-group-type or @xml:lang attribute.  contains .",
+    "position": Object {
+      "end": 1040,
+      "start": 1026,
+    },
+    "result": true,
+    "role": null,
+    "test": "$vanilla-kwd-group-count le 1",
+  },
+  Object {
+    "message": " has @xml:lang=\\"\\", which is the same as the @xml:lang value on the article. It is unnecessary.",
+    "position": Object {
+      "end": 10679,
+      "start": 10635,
+    },
+    "result": true,
+    "role": null,
+    "test": "@xml:lang and (@xml:lang = ancestor::article/@xml:lang)",
+  },
+  Object {
+    "message": " has sibling s,  kwds, but only  kwd(s) with the attribute content-type. under these conditions each kwd should have an attribute content-type.",
+    "position": Object {
+      "end": 10679,
+      "start": 10635,
+    },
+    "result": true,
+    "role": null,
+    "test": "             (preceding-sibling::kwd-group or following-sibling::kwd-group)             and (count(kwd) gt 1)             and kwd[@content-type]             and (count(kwd) != count(kwd[@content-type]))             ",
+  },
+  Object {
+    "message": "Math expressions must
+      be in <disp-formula> or <inline-formula> elements. They should not appear directly
+      in <>.",
+    "position": Object {
+      "end": 99442,
+      "start": 99424,
+    },
+    "result": true,
+    "role": null,
+    "test": "ancestor::disp-formula or ancestor::inline-formula",
+  },
+  Object {
+    "message": "Formula element should contain only one expression. If these are alternate
+      representations of the same expression, use <alternatives>. If they are different
+      expressions, tag each in its own <>.",
+    "position": Object {
+      "end": 99424,
+      "start": 99400,
+    },
+    "result": true,
+    "role": null,
+    "test": "         count(child::graphic) + count(child::tex-math) +         count(child::mml:math) < 2",
+  },
+  Object {
+    "message": " 
+      All mathematical expressions should be provided in markup using either <mml:math> or
+      <tex-math>. The only instance in which the graphic representation of a mathematical
+      expression should be used outside of <alternatives> and without the equivalent markup is
+      where that expression is so complicated that it cannot be represented in markup at all.
+    ",
+    "position": Object {
+      "end": 99424,
+      "start": 99400,
+    },
+    "result": true,
+    "role": null,
+    "test": "(graphic or inline-graphic) and not(mml:math or tex-math)",
+  },
+  Object {
+    "message": "Missing top-level <permissions> element. JATS4R-compliant articles must include
+      a <permissions> element within <article-meta>.. (See https://jats4r.org/permissions, Recommendation 1.)",
+    "position": Object {
+      "end": 1040,
+      "start": 1026,
+    },
+    "result": true,
+    "role": null,
+    "test": "permissions",
+  },
+  Object {
+    "message": " 
+      Missing <copyright-year>. When an article is under copyright (i.e. it is not in the public domain) a <copyright-year> must be given. (See https://jats4r.org/permissions, Recommendation 3.)
+    ",
+    "position": Object {
+      "end": 6304,
+      "start": 6291,
+    },
+    "result": true,
+    "role": null,
+    "test": "(copyright-statement|copyright-holder) and not(copyright-year)",
+  },
+  Object {
+    "message": " 
+      Missing <copyright-holder>. When an article is under copyright
+      (i.e. it is not in the public domain) a <copyright-holder> must be given.
+    ",
+    "position": Object {
+      "end": 6304,
+      "start": 6291,
+    },
+    "result": true,
+    "role": null,
+    "test": "(copyright-statement|copyright-year) and not(copyright-holder)",
+  },
+  Object {
+    "message": "<copyright-year> must be a 4-digit year, not \\"\\".",
+    "position": Object {
+      "end": 6421,
+      "start": 6405,
+    },
+    "result": true,
+    "role": null,
+    "test": "number() and number() > 999 and number() < 10000",
+  },
+  Object {
+    "message": " 
+      <copyright-year> should not contain whitespace. 
+    ",
+    "position": Object {
+      "end": 6421,
+      "start": 6405,
+    },
+    "result": true,
+    "role": null,
+    "test": "normalize-space(string(.)) != string(.)",
+  },
+  Object {
+    "message": "
+      If both @xlink:href and <ali:license_ref> are used to specify the licence
+      URI of an article, their contents must match exactly.
+    ",
+    "position": Object {
+      "end": 6595,
+      "start": 6529,
+    },
+    "result": true,
+    "role": null,
+    "test": "@xlink:href and ali:license_ref and                   string(@xlink:href) != string(ali:license_ref)",
+  },
+  Object {
+    "message": " 
+      Whenever the @xlink:href attribute appears on the <license> element, its
+      value must be the canonical URI of a valid license (such as a Creative Commons
+      license). In this article, the attribute is empty.
+    ",
+    "position": Object {
+      "end": 6595,
+      "start": 6529,
+    },
+    "result": true,
+    "role": null,
+    "test": "@xlink:href and normalize-space(@xlink:href) = ''",
+  },
+  Object {
+    "message": " 
+      Whenever the ali:license_ref element appears, its
+      content must be the canonical URI of a valid license (such as a Creative Commons
+      license). In this article, the element is empty.
+    ",
+    "position": Object {
+      "end": 6595,
+      "start": 6529,
+    },
+    "result": true,
+    "role": null,
+    "test": "child::node()[local-name()='license_ref'] and normalize-space(string(child::node()[local-name()='license_ref'])) = ''",
+  },
+  Object {
+    "message": "
+      No licence URI.
+      For JATS 1.1d3 and later, if the licence is defined by a canonical URI, then the
+      <license> element should have an <ali:license_ref> child, that specifies
+      that URI.
+    ",
+    "position": Object {
+      "end": 6595,
+      "start": 6529,
+    },
+    "result": true,
+    "role": null,
+    "test": "j4r:jats-version-later-1d2(/article/@dtd-version) and  not(child::node()[local-name()='license_ref'])",
+  },
+  Object {
+    "message": "
+      The license URI is given in @xlink:href.
+      For JATS 1.1d3 and later, if the licence is defined by a canonical URI, then it
+      should be specified in the <ali:license_ref> child element.
+    ",
+    "position": Object {
+      "end": 6595,
+      "start": 6529,
+    },
+    "result": true,
+    "role": null,
+    "test": "j4r:jats-version-later-1d2(/article/@dtd-version) and        @xlink:href and not(child::node()[local-name()='license_ref'])",
+  },
+  Object {
+    "message": " 
+      No licence URI.
+      For JATS 1.1d2 and earlier, if the licence is defined by a canonical URI, then the
+      <license> element should have an @xlink:href attribute, that specifies
+      that URI.
+    ",
+    "position": Object {
+      "end": 6595,
+      "start": 6529,
+    },
+    "result": true,
+    "role": null,
+    "test": "not(j4r:jats-version-later-1d2(/article/@dtd-version)) and                   not(@xlink:href)",
+  },
+  Object {
+    "message": "There should not be two or more <subj-group>s without a @subj-group-type or @xml:lang attribute.  contains .",
+    "position": Object {
+      "end": 1218,
+      "start": 1198,
+    },
+    "result": true,
+    "role": null,
+    "test": "$vanilla-subj-group-count le 1",
+  },
+  Object {
+    "message": " has @xml:lang=\\"\\", which is the same as the @xml:lang value on the article. It is unnecessary.",
+    "position": Object {
+      "end": 1281,
+      "start": 1235,
+    },
+    "result": true,
+    "role": null,
+    "test": "@xml:lang and (@xml:lang = ancestor::article/@xml:lang)",
+  },
+]
+`;

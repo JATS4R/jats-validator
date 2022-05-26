@@ -1,31 +1,29 @@
 {
   "version": 2,
   "name": "jats-validator",
-  "alias": "jats-validator.now.sh",
-  "scope": "jats4r",
-  "public": true,
+  "alias": "jats-validator.vercel.app",
   "builds": [
     {
       "src": "static/index.html",
-      "use": "@now/static"
+      "use": "@vercel/static"
     },
     {
       "src": "functions/dtd.js",
-      "use": "@now/node",
+      "use": "@vercel/node",
       "config": {
         "maxLambdaSize": "10mb"
       }
     },
     {
       "src": "functions/format.js",
-      "use": "@now/node",
+      "use": "@vercel/node",
       "config": {
         "maxLambdaSize": "10mb"
       }
     },
     {
       "src": "functions/schematron.js",
-      "use": "@now/node",
+      "use": "@vercel/node",
       "config": {
         "maxLambdaSize": "10mb"
       }
